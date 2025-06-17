@@ -1,0 +1,21 @@
+# Rasa cache
+.rasa/
+__pycache__/
+
+# Trained models
+models/
+
+# Logs
+*.log
+
+# Python environment
+.venv/
+env/
+venv/
+*.pyc
+*.pyo
+
+# Mac & IDE junk
+.DS_Store
+.idea/
+.vscode/
