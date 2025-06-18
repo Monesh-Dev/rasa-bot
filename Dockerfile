@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install -r actions/requirements.txt
+RUN pip3 install --no-cache-dir -r actions/requirements.txt --user
 
 # Default: Rasa server, override CMD for action server
 CMD ["run", "--enable-api", "--cors", "*"]
