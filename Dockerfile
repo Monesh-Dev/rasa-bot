@@ -10,4 +10,4 @@ USER root
 RUN pip3 install --no-cache-dir -r actions/requirements.txt
 
 # Default: Rasa server, override CMD for action server
-CMD rasa train && rasa run --enable-api --cors "*" --port 5005
+CMD bash -c "rasa train && rasa run --enable-api --cors '*' --port 5005"
