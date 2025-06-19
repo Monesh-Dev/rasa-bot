@@ -18,18 +18,26 @@ class ActionOpenRouterResponse(Action):
 
         user_message = tracker.latest_message.get('text', '')
 
-        # 🔄 Replace this with real data later
-        expense_summary = "Food ₹5000, Education ₹3000, Entertainment ₹2000"
+        metadata = tracker.latest_message.get("metadata", {})
+        summary = metadata.get("summary", "")
+        budget = metadata.get("budget", 0)
+        remaining = metadata.get("remaining", 0)
+        timestamp = metadata.get("timestamp", "")
 
-        prompt = (f"You are a personal finance assistant. "
-                  f"Here is the user's expense summary: {expense_summary}.\n"
-                  f"User's question: {user_message}")
+        prompt = (
+            f"You are a personal finance assistant.\n"
+            f"Time: {timestamp}\n"
+            f"Monthly budget: ₹{budget}\n"
+            f"Remaining: ₹{remaining}\n"
+            f"Expenses by category: {summary}\n"
+            f"User query: {user_message}"
+        )
 
         try:
             client = OpenAI(base_url="https://openrouter.ai/api/v1",
                 api_key=OPENROUTER_API_KEY)
             completion = client.chat.completions.create(
-                model="meta-llama/llama-4-maverick:free",
+                model="deepseek/deepseek-chat-v3-0324:free",
                 messages=[{"role": "user", "content": prompt}])
 
             reply = completion.choices[0].message.content
